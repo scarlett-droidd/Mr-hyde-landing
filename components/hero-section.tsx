@@ -1,6 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { AnimatedText } from "./animated-text"
+import PurpleVeinBackground from "./PurpleVeinBackground"
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -62,7 +63,9 @@ export function HeroSection() {
             height: `${heightVh}vh`,
           }}
         >
-          <div className="w-full h-full bg-gradient-to-b from-[#3D7A82] to-[#1B4A57]" />
+          <div className="w-full h-full relative">
+            <PurpleVeinBackground />
+          </div>
         </div>
       </div>
 
@@ -100,7 +103,7 @@ export function HeroSection() {
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[400px]"
               }`}
             >
-              <img src="/images/catridges mr-hyde.svg" alt="Mr Hyde Tattoo Cartridges" className="w-full h-auto relative z-10 drop-shadow-[0_25px_25px_rgba(143,190,46,0.4)] brightness-125 saturate-110 contrast-110" />
+              <img src="/images/herofinal.svg" alt="Mr Hyde Tattoo Cartridges" className="w-full h-auto relative z-10 drop-shadow-[0_25px_25px_rgba(143,190,46,0.4)] brightness-125 saturate-110 contrast-110" />
             </div>
           </div>
         </div>
