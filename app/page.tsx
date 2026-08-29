@@ -17,7 +17,7 @@ export default function Home() {
           { name: "Distribuidor 2", logoUrl: "/logos-distribuidores/2.png" },
           { name: "Distribuidor 3", logoUrl: "/logos-distribuidores/3.png" },
           { name: "Distribuidor 4", logoUrl: "/logos-distribuidores/4.png" },
-          { name: "Distribuidor 5", logoUrl: "/logos-distribuidores/5.png" },
+          { name: "Distribuidor 5", logoUrl: "/logos-distribuidores/5.png", scale: 1.5 },
         ]}
       />
       <FeaturesSection />

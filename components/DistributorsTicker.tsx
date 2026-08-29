@@ -11,6 +11,7 @@
 type Distributor = {
   name: string;
   logoUrl?: string; // si no hay logo, se muestra el nombre en texto
+  scale?: number;
 };
 
 type Props = {
@@ -28,7 +29,7 @@ const DEFAULT_DISTRIBUTORS: Distributor[] = [
 
 export default function DistributorsTicker({
   distributors = DEFAULT_DISTRIBUTORS,
-  speedSeconds = 40,
+  speedSeconds = 25,
 }: Props) {
   // duplicamos la lista para que el loop sea infinito y sin "salto" visible
   const items = [...distributors, ...distributors];
@@ -40,7 +41,7 @@ export default function DistributorsTicker({
           <div className="ticker-item" key={i}>
             {d.logoUrl ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={d.logoUrl} alt={d.name} className="ticker-logo" />
+              <img src={d.logoUrl} alt={d.name} className="ticker-logo" style={{ transform: d.scale ? `scale(${d.scale})` : undefined }} />
             ) : (
               <span className="ticker-name">{d.name}</span>
             )}
@@ -53,15 +54,18 @@ export default function DistributorsTicker({
           width: 100%;
           overflow: hidden;
           background-color: #5da58f; /* turquesa oficial de marca */
+          background-image: url('/texturas/comic-turquesa.png');
+          background-repeat: repeat;
+          background-size: auto; /* o el tamaño que prefieras para la textura */
           transform: skewY(-2deg);
-          padding: 8px 0;
+          padding: 0px 0;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
         }
 
         .ticker-track {
           display: flex;
           align-items: center;
-          gap: 48px;
+          gap: 96px;
           width: max-content;
           animation-name: scroll;
           animation-timing-function: linear;
@@ -72,13 +76,13 @@ export default function DistributorsTicker({
           display: flex;
           align-items: center;
           justify-content: center;
-          min-width: 160px;
+          min-width: 250px;
           transform: skewY(2deg); /* corrige la inclinación para que el logo quede recto */
           mix-blend-mode: multiply;
         }
 
         .ticker-logo {
-          height: 105px;
+          height: 145px;
           width: auto;
           object-fit: contain;
         }
@@ -97,6 +101,15 @@ export default function DistributorsTicker({
           }
           to {
             transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 480px) {
+          .ticker-item {
+            min-width: 45vw;
+          }
+          .ticker-track {
+            gap: 48px;
           }
         }
       `}</style>

@@ -63,8 +63,9 @@ export function HeroSection() {
             height: `${heightVh}vh`,
           }}
         >
-          <div className="w-full h-full relative">
+          <div className="absolute inset-0">
             <PurpleVeinBackground />
+            <div className="absolute inset-0 bg-black/50 pointer-events-none" />
           </div>
         </div>
       </div>
