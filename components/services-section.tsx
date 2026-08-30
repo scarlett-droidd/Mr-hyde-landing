@@ -87,7 +87,7 @@ export async function ServicesSection() {
         <div className="relative px-6 lg:px-8 py-16 lg:py-24 mb-32 overflow-hidden rounded-3xl border border-border">
           <div className="absolute inset-0 w-full h-full">
             <img
-              src="/images/Copia de 650A5656.jpg"
+              src="/images/Copia%20de%20650A5656.jpg"
               alt="Mr Hyde Tattoo Cartridges Box"
               className="w-full h-full object-cover"
             />
