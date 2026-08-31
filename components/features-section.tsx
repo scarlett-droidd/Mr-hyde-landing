@@ -3,55 +3,35 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { List, X, Plus } from "lucide-react"
+import { useLanguage } from "@/context/language-context"
 
-const specs = [
-  {
-    id: 1,
-    title: "Finger Ledge Design",
-    description: "Soporte ergonómico para los dedos. Más control y precisión, reduciendo la fatiga en sesiones extensas.",
-    x: 35,
-    y: 20,
-  },
-  {
-    id: 2,
-    title: "Material médico transparente",
-    description: "Plástico grado médico esterilizado con gas EO, con carcasa transparente que da visión total del flujo de tinta y posición de la aguja. Higiene impecable, listo para uso inmediato.",
-    x: 65,
-    y: 35,
-  },
-  {
-    id: 3,
-    title: "Membrana de sílice antirreflujo",
-    description: "Barrera impenetrable que evita que la tinta o fluidos regresen y contaminen la máquina.",
-    x: 35,
-    y: 55,
-  },
-  {
-    id: 4,
-    title: "Ajuste Super Tight y operación estable",
-    description: "La aguja queda perfectamente centrada sin bamboleo, asegurando trazos con precisión milimétrica. Diseño estabilizado que reduce el ruido y la vibración para un trabajo más fluido.",
-    x: 65,
-    y: 75,
-  },
-  {
-    id: 5,
-    title: "Acero 304H con Easier to Ink",
-    description: "Acero 304H (High Carbon) que mantiene el filo en sesiones largas, logrando penetración limpia y mejor cicatrización. Sus micro-surcos mejoran la adherencia y flujo de tinta, con menos repasadas.",
-    x: 40,
-    y: 92,
-  }
+const specsLayout = [
+  { id: 1, x: 35, y: 20 },
+  { id: 2, x: 65, y: 35 },
+  { id: 3, x: 35, y: 55 },
+  { id: 4, x: 65, y: 75 },
+  { id: 5, x: 40, y: 92 },
 ]
 
 export function FeaturesSection() {
   const [activeSpot, setActiveSpot] = useState<number | null>(0)
   const [viewMode, setViewMode] = useState<"hotspots" | "list">("hotspots")
+  const { t } = useLanguage()
+  
+  const specs = t.features.items.map((item, index) => ({
+    id: index + 1,
+    title: item.title,
+    description: item.description,
+    x: specsLayout[index].x,
+    y: specsLayout[index].y,
+  }))
 
   return (
     <section id="specs" className="py-24 lg:py-32 px-6 relative bg-card min-h-screen flex flex-col justify-center">
       {/* Background Text */}
       <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-center pointer-events-none z-0 opacity-5 overflow-hidden">
         <span className="font-serif font-bold text-center text-[20vw] sm:text-[18vw] leading-none tracking-tighter text-primary whitespace-nowrap">
-          SPECS
+          {t.features.bgText}
         </span>
       </div>
 
@@ -60,10 +40,10 @@ export function FeaturesSection() {
         <div className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-border/50 pb-8">
           <div className="max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-normal mb-4 text-balance font-serif text-primary">
-              Estándar técnico no negociable
+              {t.features.title}
             </h2>
             <p className="text-muted-foreground leading-relaxed text-lg">
-              Explora las características que hacen de nuestros cartuchos la herramienta definitiva para precisión y seguridad.
+              {t.features.subtitle}
             </p>
           </div>
           <button
@@ -73,12 +53,12 @@ export function FeaturesSection() {
             {viewMode === "hotspots" ? (
               <>
                 <List className="w-4 h-4" />
-                Ver lista completa
+                {t.features.listButton}
               </>
             ) : (
               <>
                 <X className="w-4 h-4" />
-                Cerrar lista
+                {t.features.closeButton}
               </>
             )}
           </button>
@@ -99,7 +79,7 @@ export function FeaturesSection() {
               <div className="hidden lg:flex lg:col-span-5 flex-col justify-center relative h-[500px]">
                 {activeSpot === null && (
                   <div className="absolute inset-0 flex items-center justify-center text-center opacity-50 z-0 transition-opacity duration-500">
-                    <p className="text-xl">Haz clic en un punto para ver los detalles.</p>
+                    <p className="text-xl">{t.features.helpDesktop}</p>
                   </div>
                 )}
                 {specs.map((spec, index) => {
@@ -113,7 +93,7 @@ export function FeaturesSection() {
                       key={spec.id}
                       className="absolute left-0 right-0 p-10 rounded-3xl backdrop-blur-xl shadow-2xl transition-all duration-500 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] bg-card/95 border border-white/10 origin-top"
                       style={{
-                        top: "20%", // Set near the top so it has room to stack downwards
+                        top: "20%",
                         zIndex: 10 - offset,
                         opacity: currentOpacity,
                         transform: `translateY(${offset * 24}px) scale(${1 - offset * 0.04})`,
@@ -165,17 +145,17 @@ export function FeaturesSection() {
                         exit={{ opacity: 0 }}
                         className="text-center p-6 opacity-50"
                       >
-                        <p className="text-sm">Toca un punto para ver los detalles.</p>
+                        <p className="text-sm">{t.features.helpMobile}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
 
                 {/* Interactive Image Container */}
-                <div className="relative w-full max-w-[400px] aspect-[1/2]">
+                <div className="relative w-full max-w-[480px] aspect-[1/2]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
-                    src="/productos/cartridge-hero.svg" 
+                    src="/productos/Estándar-técnico no-negociable.svg" 
                     alt="Cartridge Blueprint" 
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(209,67,124,0.15)]"
                   />

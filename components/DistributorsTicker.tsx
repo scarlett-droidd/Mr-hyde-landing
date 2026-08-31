@@ -8,6 +8,8 @@
  * No requiere librerías externas — usa CSS puro (styled-jsx, incluido en Next.js).
  */
 
+import { useLanguage } from "@/context/language-context"
+
 type Distributor = {
   name: string;
   logoUrl?: string; // si no hay logo, se muestra el nombre en texto
@@ -19,34 +21,35 @@ type Props = {
   speedSeconds?: number; // qué tan rápido se desliza (menor = más rápido)
 };
 
-const DEFAULT_DISTRIBUTORS: Distributor[] = [
-  { name: "Distribuidor 1" },
-  { name: "Distribuidor 2" },
-  { name: "Distribuidor 3" },
-  { name: "Distribuidor 4" },
-  { name: "Distribuidor 5" },
-];
-
 export default function DistributorsTicker({
-  distributors = DEFAULT_DISTRIBUTORS,
+  distributors,
   speedSeconds = 25,
 }: Props) {
-  // duplicamos la lista para que el loop sea infinito y sin "salto" visible
-  const items = [...distributors, ...distributors];
+  const { t } = useLanguage();
+  
+  const actualDistributors = distributors || t.ticker.names.map(name => ({ name }));
+  const items = [...actualDistributors, ...actualDistributors];
 
   return (
     <div className="ticker-wrapper">
       <div className="ticker-track" style={{ animationDuration: `${speedSeconds}s` }}>
-        {items.map((d, i) => (
-          <div className="ticker-item" key={i}>
-            {d.logoUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={d.logoUrl} alt={d.name} className="ticker-logo" style={{ transform: d.scale ? `scale(${d.scale})` : undefined }} />
-            ) : (
-              <span className="ticker-name">{d.name}</span>
-            )}
-          </div>
-        ))}
+        {items.map((d, i) => {
+          // Si d.name es "Distribuidor X", lo reemplazamos por su traducción
+          // Como los pasamos desde page.tsx, es más seguro simplemente usar el original si no matchea
+          const nameIndex = t.ticker.names.findIndex(n => n.includes(d.name.split(' ')[1]) || n === d.name);
+          const translatedName = nameIndex !== -1 ? t.ticker.names[nameIndex] : d.name;
+
+          return (
+            <div className="ticker-item" key={i}>
+              {d.logoUrl ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={d.logoUrl} alt={translatedName} className="ticker-logo" style={{ transform: d.scale ? `scale(${d.scale})` : undefined }} />
+              ) : (
+                <span className="ticker-name">{translatedName}</span>
+              )}
+            </div>
+          )
+        })}
       </div>
 
       <style jsx>{`

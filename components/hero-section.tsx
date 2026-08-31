@@ -2,10 +2,13 @@
 import { useEffect, useState } from "react"
 import { AnimatedText } from "./animated-text"
 import PurpleVeinBackground from "./PurpleVeinBackground"
+import { useLanguage } from "@/context/language-context"
+import { ArrowRight } from "lucide-react"
 
 export function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const { t } = useLanguage()
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,7 +56,7 @@ export function HeroSection() {
   const heightVh = 100 - easeOutQuad(scrollProgress) * 37.5
 
   return (
-    <section className="pt-32 pb-12 px-6 min-h-screen flex items-center relative overflow-hidden">
+    <section className="pt-40 pb-12 px-6 min-h-screen flex items-center relative overflow-hidden">
       <div className="absolute inset-0 top-0">
         <div
           className="w-full will-change-transform overflow-hidden"
@@ -92,8 +95,17 @@ export function HeroSection() {
             className={`transition-all duration-1000 delay-[800ms] ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             <h1 className="font-serif text-accent text-[3rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] 2xl:text-[7.5rem] font-normal leading-tight mb-6 w-full px-4 max-w-6xl mx-auto text-balance">
-              <AnimatedText text="Rendimiento implacable, precisión absoluta." delay={0.3} />
+              <AnimatedText text={t.hero.title} delay={0.3} />
             </h1>
+            <div className="flex justify-center mt-16">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-bold rounded-xl px-8 py-4 transition-all duration-300 hover:bg-primary/90"
+              >
+                {t.hero.ctaButton}
+                <ArrowRight className="w-5 h-5" />
+              </a>
+            </div>
           </div>
         </div>
 
