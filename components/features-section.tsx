@@ -155,7 +155,7 @@ export function FeaturesSection() {
                 <div className="relative w-full max-w-[480px] aspect-[1/2]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img 
-                    src="/productos/Estándar-técnico no-negociable.svg" 
+                    src="/productos/estandar-tecnico.svg" 
                     alt="Cartridge Blueprint" 
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(209,67,124,0.15)]"
                   />
