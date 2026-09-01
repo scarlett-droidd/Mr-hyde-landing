@@ -25,10 +25,10 @@ export function CTASection() {
     setIsSubmitting(true)
     setSubmitStatus("idle")
 
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/TU_ID_AQUI" // reemplazar por el endpoint real de Formspree
+    const API_ENDPOINT = "/api/contact"
 
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch(API_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -19,10 +19,10 @@ export function Footer() {
               {t.footer.description}
             </p>
             <div className="flex gap-4">
-              <Link href="#" className="w-10 h-10 border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors">
+              <Link href="https://www.instagram.com/mrhyde_cartridges/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors">
                 <Instagram className="w-5 h-5" />
               </Link>
-              <Link href="#" className="w-10 h-10 border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors">
+              <Link href="https://www.facebook.com/profile.php?id=61587554250231" target="_blank" rel="noopener noreferrer" className="w-10 h-10 border border-border rounded-full flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors">
                 <Facebook className="w-5 h-5" />
               </Link>
             </div>

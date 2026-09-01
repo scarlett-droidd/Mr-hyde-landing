@@ -19,7 +19,6 @@ export default function Home() {
       <HeroSection />
       <DistributorsTicker
         distributors={[
-          { name: "Distribuidor 1", logoUrl: "/logos-distribuidores/1.png" },
           { name: "Distribuidor 2", logoUrl: "/logos-distribuidores/2.png" },
           { name: "Distribuidor 3", logoUrl: "/logos-distribuidores/3.png" },
           { name: "Distribuidor 4", logoUrl: "/logos-distribuidores/4.png" },

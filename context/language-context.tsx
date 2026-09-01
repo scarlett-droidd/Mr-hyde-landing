@@ -12,7 +12,7 @@ type LanguageContextType = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("es")
+  const [language, setLanguage] = useState<Language>("en")
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Prevent hydration mismatch by using default until mounted, 
   // though for simple text replacements it's usually fine.
-  const currentTranslations = translations[mounted ? language : "es"]
+  const currentTranslations = translations[mounted ? language : "en"]
 
   return (
     <LanguageContext.Provider value={{ language, toggleLanguage, t: currentTranslations }}>
