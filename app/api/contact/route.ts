@@ -1,19 +1,13 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
 
-// Inicializa Resend con tu API Key que viene del archivo .env
-const resend = new Resend(process.env.RESEND_API_KEY);
+export const runtime = 'edge';
 
 // El email a donde quieres RECIBIR los correos de tus distribuidores
-const TO_EMAIL = process.env.RESEND_TO_EMAIL || 'tucorreo@empresa.com';
-
-// El email desde donde se ENVÍAN los correos (debe ser un dominio verificado en Resend)
-// Por defecto, mientras pruebas y si no tienes dominio verificado, Resend usa este:
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+const TO_EMAIL = process.env.RESEND_TO_EMAIL || 'info@mrhydecartridges.com';
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'info@mrhydecartridges.com';
 
 export async function POST(req: Request) {
   try {
-    // Recibimos los datos que manda el formulario (cta-section.tsx)
     const body = await req.json();
     const { _replyto, _subject, message } = body;
 
@@ -21,16 +15,25 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Faltan datos obligatorios' }, { status: 400 });
     }
 
-    const data = await resend.emails.send({
-      from: `Mr. Hyde Web <${FROM_EMAIL}>`,
-      to: [TO_EMAIL],
-      replyTo: _replyto,
-      subject: _subject || `Nueva solicitud de distribución`,
-      text: message,
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: `Mr. Hyde Web <${FROM_EMAIL}>`,
+        to: [TO_EMAIL],
+        reply_to: _replyto,
+        subject: _subject || `Nueva solicitud de distribución`,
+        text: message,
+      }),
     });
 
-    if (data.error) {
-      return NextResponse.json({ error: data.error }, { status: 400 });
+    const data = await response.json();
+
+    if (!response.ok) {
+      return NextResponse.json({ error: data }, { status: 400 });
     }
 
     return NextResponse.json({ success: true, data }, { status: 200 });
