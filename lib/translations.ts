@@ -211,4 +211,4 @@ export const translations = {
       copyright: (year: number) => `© ${year} Mr. Hyde Tattoo Cartridges. All rights reserved.`,
     },
   },
-} as const
+}
