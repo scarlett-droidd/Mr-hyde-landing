@@ -14,11 +14,10 @@ export const metadata: Metadata = {
   description: "Rendimiento implacable, precisión absoluta. Conviértete en distribuidor de los cartuchos de tatuaje Mr. Hyde.",
   generator: 'v0.app',
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.png', type: 'image/png' },
-    ]
-  }
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+    apple: "/apple-icon.png",
+  },
 }
 
 export default function RootLayout({
