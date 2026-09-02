@@ -27,7 +27,7 @@ export default function DistributorsTicker({
 }: Props) {
   const { t } = useLanguage();
   
-  const actualDistributors = distributors || t.ticker.names.map(name => ({ name }));
+  const actualDistributors = distributors || t.ticker.names.map(name => ({ name } as Distributor));
   const items = [...actualDistributors, ...actualDistributors];
 
   return (

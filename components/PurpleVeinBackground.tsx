@@ -121,7 +121,7 @@ export default function PurpleVeinBackground() {
         const cell = voronoi.cellPolygon(i);
         if (!cell) continue;
         ctx!.beginPath();
-        cell.forEach(([x, y], j) => (j === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)));
+        cell.forEach(([x, y]: any, j: number) => (j === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)));
         ctx!.closePath();
         ctx!.stroke();
       }
@@ -135,7 +135,7 @@ export default function PurpleVeinBackground() {
         const cell = voronoi.cellPolygon(i);
         if (!cell) continue;
         ctx!.beginPath();
-        cell.forEach(([x, y], j) => (j === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)));
+        cell.forEach(([x, y]: any, j: number) => (j === 0 ? ctx!.moveTo(x, y) : ctx!.lineTo(x, y)));
         ctx!.closePath();
         ctx!.stroke();
       }

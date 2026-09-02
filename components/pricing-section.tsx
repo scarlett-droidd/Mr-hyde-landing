@@ -82,7 +82,7 @@ export function PricingSection() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const positionRef = useRef(0)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(0)
 
   const duplicatedProperties = [...properties, ...properties, ...properties]
 
