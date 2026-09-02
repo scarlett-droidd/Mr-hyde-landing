@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   title: "Mr. Hyde Tattoo Cartridges | B2B Distribution",
   description: "Rendimiento implacable, precisión absoluta. Conviértete en distribuidor de los cartuchos de tatuaje Mr. Hyde.",
   generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.png', type: 'image/png' },
+    ]
+  }
 }
 
 export default function RootLayout({
